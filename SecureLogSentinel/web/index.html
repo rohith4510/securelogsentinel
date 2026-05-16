@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureLog Sentinel Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="control-panel">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span>
+        </div>
+        <div>
+          <h1>SecureLog Sentinel</h1>
+          <p>Cybersecurity log analysis</p>
+        </div>
+      </div>
+
+      <div class="control-block">
+        <label for="fileInput">CSV file</label>
+        <input id="fileInput" type="file" accept=".csv,text/csv">
+      </div>
+
+      <div class="button-row">
+        <button id="loadSampleBtn" type="button">Load sample</button>
+        <button id="analyzeBtn" class="primary" type="button">Analyze</button>
+      </div>
+
+      <div class="control-block grow">
+        <label for="logInput">Input log</label>
+        <textarea id="logInput" spellcheck="false"></textarea>
+      </div>
+
+      <div class="button-row">
+        <button id="customSampleBtn" type="button">Custom sample</button>
+        <button id="clearBtn" type="button">Clear</button>
+      </div>
+    </aside>
+
+    <main class="dashboard">
+      <section class="topbar" aria-label="Project summary">
+        <div>
+          <p class="eyebrow">DSA + Cybersecurity</p>
+          <h2>Threat Detection Dashboard</h2>
+        </div>
+        <button id="exportBtn" type="button">Export report</button>
+      </section>
+
+      <section class="metrics" aria-label="Security metrics">
+        <article class="metric">
+          <span>Events</span>
+          <strong id="eventCount">0</strong>
+        </article>
+        <article class="metric">
+          <span>Alerts</span>
+          <strong id="alertCount">0</strong>
+        </article>
+        <article class="metric">
+          <span>High risk</span>
+          <strong id="highRiskCount">0</strong>
+        </article>
+        <article class="metric accent">
+          <span>Top source</span>
+          <strong id="topSource">None</strong>
+        </article>
+      </section>
+
+      <section class="work-grid">
+        <section class="panel risk-panel" aria-label="Risk ranking">
+          <div class="panel-header">
+            <h3>Risk Ranking</h3>
+            <span id="riskSummary">0 sources</span>
+          </div>
+          <div id="riskList" class="risk-list"></div>
+        </section>
+
+        <section class="panel map-panel" aria-label="Service map">
+          <div class="panel-header">
+            <h3>Service Map</h3>
+            <span id="mapSummary">0 connections</span>
+          </div>
+          <canvas id="serviceMap" width="760" height="360"></canvas>
+        </section>
+      </section>
+
+      <section class="panel trace-panel" aria-label="DSA trace">
+        <div class="panel-header">
+          <h3>DSA Trace</h3>
+          <span id="traceSummary">Ready</span>
+        </div>
+        <div id="traceGrid" class="trace-grid"></div>
+      </section>
+
+      <section class="panel alerts-panel" aria-label="Security alerts">
+        <div class="panel-header filter-header">
+          <h3>Alerts</h3>
+          <div class="filter-tabs" role="group" aria-label="Alert filters">
+            <button class="filter active" type="button" data-filter="all">All</button>
+            <button class="filter" type="button" data-filter="login">Login</button>
+            <button class="filter" type="button" data-filter="network">Network</button>
+            <button class="filter" type="button" data-filter="web">Web</button>
+            <button class="filter" type="button" data-filter="recon">Recon</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Severity</th>
+                <th>Type</th>
+                <th>Source</th>
+                <th>Time</th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
+            <tbody id="alertsTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
